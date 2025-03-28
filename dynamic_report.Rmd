@@ -52,8 +52,7 @@ latest_data <- logged_data %>%
 
 ### Abundance Graph
 
-The first factor analysed was abundance.This bar graph compares the number of native birds to non-native birds at Meola Reef Reserve.\
-This shows that there was a higher abundance of native birds found compared to non-native birds.
+The first factor analysed was abundance. This bar graph compares the number of native birds to non-native birds at Meola Reef Reserve.
 
 ```{r abundance, fig.width = 13.5, fig.height = 7, fig.align = "center"}
 ggplot(data = latest_data) +
@@ -73,8 +72,7 @@ ggplot(data = latest_data) +
 
 ### Distribution Graph
 
-The second factor analysed was distribution. This bar graph shows the habitat distribution of birds found at Meola Reef Reserve, and whether they were native or non-native species.\
-This shows that there was a higher abundance of birds found at rank grass vegetation areas, and both native and non-native bird species were found at this habitat. There was a lower abundance of birds found at native vegetation areas, and salt marsh, coastal shrub or mangrove areas, and interestingly, they were all native species.
+The second factor analysed was distribution. This bar graph shows the habitat distribution of birds found at Meola Reef Reserve, and whether they were native or non-native species.
 
 ```{r distribution, fig.width = 13.5, fig.height = 7, fig.align = "center"}
 ggplot(data = latest_data) +
