@@ -1,0 +1,99 @@
+---
+title: My dynamic report
+output: html_fragment
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+library(tidyverse)
+```
+
+```{css}
+h2 {
+  font-weight: bold;
+  text-align: center;
+  color: #9FD5E8
+}
+
+h3 {
+  color: #9FD5E8
+}
+
+p{
+  padding: 30pt
+}
+
+body{
+  font-family: Sans-Serif;
+  font-size: 14pt;
+  padding: 20pt;
+}
+
+```
+
+## Bird Diversity at Meola Reef Reserve (Te Tokaroa)
+
+This study was done on the abundance and distribution of native and non-native bird species at Meola Reef Reserve (Te Tokaroa) in Western Springs, during March 2025.\
+The purpose of this was to observe and understand more about the diversity of bird species at Meola Reef Reserve, a suburban location in Auckland, New Zealand.
+
+```{r}
+logged_data <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vSEcG28d-pAJ7jbyBIkgvRrlLHbVzawzAD0k6aOz-vRThTM_iI-umNRR5KBcFqHDxKRP8MOCw2cY1pd/pub?output=csv")
+
+latest_data <- logged_data %>%
+  rename(NZ_status = 2,
+         frequency = 3,
+         habitat = 4)
+```
+
+### Summary Values
+
+`r paste("The total number of birds observed during this study was", latest_data$frequency %>% sum(), "individuals.")` \
+`r paste("The average number of birds of one species observed during this study was", latest_data$frequency %>% mean() %>% round(2), "individuals.")`
+
+### Abundance Graph
+
+The first factor analysed was abundance.This bar graph compares the number of native birds to non-native birds at Meola Reef Reserve.\
+This shows that there was a higher abundance of native birds found compared to non-native birds.
+
+```{r abundance, fig.width = 13.5, fig.height = 7, fig.align = "center"}
+ggplot(data = latest_data) +
+  geom_bar(aes(x = NZ_status),
+           fill = c("#9FD5E8", "#A1BD8B")) +
+  labs(title = "Abundance of native and non-native bird species found at Meola Reef Reserve",
+       subtitle = "Observed during March 2025",
+       x = "New Zealand status",
+       y = "Number of birds") +
+  theme(
+    plot.title = element_text(size = 20, face = "bold"),
+    plot.subtitle = element_text(size = 16),
+    axis.title = element_text(size = 16, face = "bold"),
+    axis.text = element_text(size = 14)
+  )
+```
+
+### Distribution Graph
+
+The second factor analysed was distribution. This bar graph shows the habitat distribution of birds found at Meola Reef Reserve, and whether they were native or non-native species.\
+This shows that there was a higher abundance of birds found at rank grass vegetation areas, and both native and non-native bird species were found at this habitat. There was a lower abundance of birds found at native vegetation areas, and salt marsh, coastal shrub or mangrove areas, and interestingly, they were all native species.
+
+```{r distribution, fig.width = 13.5, fig.height = 7, fig.align = "center"}
+ggplot(data = latest_data) +
+  geom_bar(aes(x = habitat, fill = NZ_status)) +
+  labs(title = str_wrap("Habitat distribution of bird species found at Meola Reef Reserve, grouped by their New Zealand status",
+                        width = 90),
+       subtitle = "Observed during March 2025",
+       x = "Habitat (vegetation area type)",
+       y = "Number of birds",
+       fill = "New Zealand Status") +
+  scale_fill_manual(values = c("#9FD5E8", "#A1BD8B")) +
+  theme(
+    plot.title = element_text(size = 20, face = "bold"),
+    plot.subtitle = element_text(size = 16),
+    axis.title = element_text(size = 16, face = "bold"),
+    axis.text = element_text(size = 14),
+    legend.title = element_text(size = 16, face = "bold"),
+    legend.text = element_text(size = 14)
+  ) +
+  scale_x_discrete(
+    labels = c("Native", "Rank grass", "Salt marsh, coastal shrub or mangrove"))
+```
