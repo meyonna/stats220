@@ -33,8 +33,7 @@ body{
 
 ## Bird Diversity at Meola Reef Reserve (Te Tokaroa)
 
-This study was done on the abundance and distribution of native and non-native bird species at Meola Reef Reserve (Te Tokaroa) in Western Springs, during March 2025.\
-The purpose of this was to observe and understand more about the diversity of bird species at Meola Reef Reserve, a suburban location in Auckland, New Zealand.
+This study was done on the abundance and distribution of native and non-native bird species at Meola Reef Reserve (Te Tokaroa) in Western Springs, during March 2025. The purpose of this was to observe and understand more about the diversity of bird species at Meola Reef Reserve, a suburban location in Auckland, New Zealand. This study can have future benefits as this data can be used to create favourable habitats to support a higher diversity of native species.
 
 ```{r}
 logged_data <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vSEcG28d-pAJ7jbyBIkgvRrlLHbVzawzAD0k6aOz-vRThTM_iI-umNRR5KBcFqHDxKRP8MOCw2cY1pd/pub?output=csv")
